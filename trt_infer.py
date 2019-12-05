@@ -4,9 +4,9 @@
 #   Copyright (C) 2019 * Ltd. All rights reserved.
 #
 #   Editor      : VIM
-#   File name   : test.py
+#   File name   : trt_infer.py
 #   Author      : YunYang1994
-#   Created date: 2019-12-04 13:21:18
+#   Created date: 2019-12-05 13:22:49
 #   Description :
 #
 #================================================================
@@ -24,7 +24,7 @@ TRT_LOGGER = trt.Logger()
 
 
 engine_file_path = "yolov3.engine"
-uff_file_path = "yolov3.uff"
+uff_file_path = "yolov3_voc.uff"
 input_image_path = "./road.jpeg"
 input_size = (608, 608)
 num_class = len(classes)
