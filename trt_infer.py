@@ -73,6 +73,6 @@ pred_bboxes = np.concatenate([np.reshape(pred_bbox, (-1, 5+num_class)) for pred_
 bboxes = utils.postprocess_boxes(pred_bboxes, image_size, input_size[0], 0.3)
 bboxes = utils.nms(bboxes, 0.5, method='nms')
 image = utils.draw_bbox(image, bboxes)
-cv2.imwrite("result.jpg", image)
+cv2.imwrite("trt_result.jpg", image)
 
 
