@@ -54,7 +54,7 @@ def read_class_names(class_file_name):
             names[ID] = name.strip('\n')
     return names
 
-classes = read_class_names("class.name")
+classes = read_class_names("voc_class.name")
 
 def get_anchors(anchors_path):
     '''loads the anchors from a file'''

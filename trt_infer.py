@@ -25,10 +25,12 @@ TRT_LOGGER = trt.Logger()
 
 engine_file_path = "yolov3.engine"
 uff_file_path = "yolov3_voc.uff"
-input_image_path = "./road.jpeg"
+input_image_path = "./road.jpg"
 input_size = (608, 608)
 num_class = len(classes)
 strides = [8, 16, 32]
+
+if not os.path.exists(uff_file_path): raise ValueError("%s does not exists!" %uff_file_path)
 
 image = cv2.imread(input_image_path)
 image_size = image.shape[:2]
@@ -70,7 +72,7 @@ trt_outputs = [output.reshape(shape) for output, shape in zip(trt_outputs, outpu
 pred_bboxes = [utils.decode(trt_outputs[i], anchors[i], strides[i]) for i in range(3)]
 pred_bboxes = np.concatenate([np.reshape(pred_bbox, (-1, 5+num_class)) for pred_bbox in pred_bboxes], axis=0)
 
-bboxes = utils.postprocess_boxes(pred_bboxes, image_size, input_size[0], 0.3)
+bboxes = utils.postprocess_boxes(pred_bboxes, image_size, input_size[0], 0.4)
 bboxes = utils.nms(bboxes, 0.5, method='nms')
 image = utils.draw_bbox(image, bboxes)
 cv2.imwrite("trt_result.jpg", image)

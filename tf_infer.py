@@ -19,7 +19,7 @@ import tensorflow as tf
 
 return_elements  = ["input/input_data:0", "conv_sbbox/BiasAdd:0", "conv_mbbox/BiasAdd:0", "conv_lbbox/BiasAdd:0"]
 pb_file          = "./yolov3_voc.pb"
-input_image_path = "./road.jpeg"
+input_image_path = "./road.jpg"
 num_class        = len(classes)
 strides          = [8, 16, 32]
 input_size       = (608, 608)
@@ -44,7 +44,7 @@ with tf.Session(graph=graph) as sess:
 pred_bboxes = [utils.decode(tf_outputs[i], anchors[i], strides[i]) for i in range(3)]
 pred_bboxes = np.concatenate([np.reshape(pred_bbox, (-1, 5+num_class)) for pred_bbox in pred_bboxes], axis=0)
 
-bboxes = utils.postprocess_boxes(pred_bboxes, image_size, input_size[0], 0.3)
+bboxes = utils.postprocess_boxes(pred_bboxes, image_size, input_size[0], 0.4)
 bboxes = utils.nms(bboxes, 0.5, method='nms')
 image = utils.draw_bbox(image, bboxes)
 cv2.imwrite("tf_result.jpg", image)
