@@ -1,7 +1,7 @@
 ## requirements
 
 - tensorrt==5.1.5.0
-- tensorflow == 1.10
+- tensorflow==1.10
 - pycuda==2019.1.2
 
 ## useage
